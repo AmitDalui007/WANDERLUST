@@ -36,11 +36,11 @@ module.exports.createListing = async (req, res, next) => {
     // if(!req.body.listing){
     //   throw new ExpressError(400,"Send valid data for listings");
     // }
-    let response = await geocodingClient.forwardGeocode({
-      query: req.body.listing.location,
-      limit: 2
-    })
-    .send();
+    // let response = await geocodingClient.forwardGeocode({
+    //   query: req.body.listing.location,
+    //   limit: 2
+    // })
+    // .send();
 
     let url = req.file.path;
     let filename = req.file.filename;
@@ -48,7 +48,7 @@ module.exports.createListing = async (req, res, next) => {
     newListing.owner = req.user._id;
     newListing.image = {url, filename};
     
-    newListing.geometry = response.body.features[0].geometry;
+    //newListing.geometry = response.body.features[0].geometry;
     
     await newListing.save();
     req.flash("success","New Listing created!");
